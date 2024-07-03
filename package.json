@@ -3,7 +3,7 @@
   "packageManager": "yarn@4.2.2",
   "scripts": {
     "build": "tsc",
-    "start": "node src/init",
+    "start": "node build/test",
     "dev": "ts-node src/lib/ollama.ts"
   },
   "devDependencies": {
