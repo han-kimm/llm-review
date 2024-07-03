@@ -1,0 +1,6 @@
+{
+  "extends": "@ecubelabs/tsconfig/node20.json",
+  "compilerOptions": {
+    "lib": ["es2023", "DOM"]
+  }
+}

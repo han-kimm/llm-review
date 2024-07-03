@@ -1,3 +1,4 @@
+.yarn
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
@@ -11,3 +12,6 @@
 
 #!.yarn/cache
 .pnp.*
+
+.env
+node_modules

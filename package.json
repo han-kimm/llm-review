@@ -1,4 +1,18 @@
 {
   "name": "llmReview",
-  "packageManager": "yarn@4.2.2"
+  "packageManager": "yarn@4.2.2",
+  "scripts": {
+    "build": "tsc",
+    "start": "node src/init",
+    "dev": "ts-node src/lib/ollama.ts"
+  },
+  "devDependencies": {
+    "@ecubelabs/tsconfig": "^1.1.2",
+    "dotenv": "^16.4.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  },
+  "dependencies": {
+    "ollama": "^0.5.2"
+  }
 }
