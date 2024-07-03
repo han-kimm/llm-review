@@ -15,5 +15,10 @@ inputs:
     required: false
     default: ""
 runs:
-  using: "node20"
-  main: "build/test.js"
+  using: "composite"
+  steps:
+   - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+   - run: npm install
+   - run: npm start
