@@ -21,4 +21,6 @@ runs:
       with:
         node-version: 20
    - run: npm install
+     shell: bash
    - run: npm start
+     shell: bash
