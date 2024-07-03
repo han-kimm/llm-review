@@ -24,5 +24,6 @@ runs:
       cache: 'npm'
   - run: npm install
     shell: bash
-  - uses: node 20
-    main: build/index.js
+runs:
+  using: "node20"
+  main: "build/test.js"
