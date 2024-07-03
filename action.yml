@@ -1,0 +1,22 @@
+name: "LLM code reviewer"
+description: "automatic code review by LLM"
+inputs:
+  GITHUB_TOKEN:
+    required: true
+  LLM_API_KEY:
+    description: "api key for calling LLM API."
+    required: true
+  LLM_API_MODEL:
+    description: "model name to use."
+    required: false
+    default: "claude-3-haiku-20240307"
+  exclude:
+    description: "exclude files from the diff analysis by Glob pattern"
+    required: false
+    default: ""
+runs:
+  using: "node20"
+  main: "build/test.js"
+branding:
+  icon: "aperture"
+  color: "green"
