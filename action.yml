@@ -22,5 +22,5 @@ runs:
       node-version: 20
   - run: npm install
     shell: bash
-  - run: node build/test.js
+  - run: npm start
     shell: bash
