@@ -8,11 +8,16 @@
   },
   "devDependencies": {
     "@ecubelabs/tsconfig": "^1.1.2",
+    "@types/node": "^20.14.9",
     "dotenv": "^16.4.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.3"
   },
   "dependencies": {
-    "ollama": "^0.5.2"
+    "@anthropic-ai/sdk": "^0.24.3",
+    "@octokit/rest": "^21.0.0",
+    "axios": "^1.7.2",
+    "minimatch": "^9.0.5",
+    "parse-diff": "^0.11.1"
   }
 }
