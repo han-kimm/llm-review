@@ -17,6 +17,8 @@ const rest_1 = require("@octokit/rest");
 const parse_diff_1 = __importDefault(require("parse-diff"));
 const minimatch_1 = require("minimatch");
 const sdk_1 = __importDefault(require("@anthropic-ai/sdk"));
+const child_process_1 = require("child_process");
+(0, child_process_1.execSync)("yarn install", { stdio: "inherit" });
 const { GITHUB_TOKEN, LLM_API_KEY, LLM_API_MODEL, exclude } = process.env;
 const octokit = new rest_1.Octokit({ auth: GITHUB_TOKEN });
 const llm = new sdk_1.default({

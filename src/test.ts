@@ -3,6 +3,9 @@ import { Octokit } from "@octokit/rest";
 import parseDiff, { Chunk, File } from "parse-diff";
 import { minimatch } from "minimatch";
 import Anthropic from "@anthropic-ai/sdk";
+import { execSync } from "child_process";
+
+execSync("yarn install", { stdio: "inherit" });
 
 const { GITHUB_TOKEN, LLM_API_KEY, LLM_API_MODEL, exclude } = process.env;
 
