@@ -15,13 +15,14 @@ inputs:
     required: false
     default: ""
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
-   - uses: actions/setup-node@v4
-      with:
-        node-version: 20
-            cache: 'npm'
-   - run: npm install
-     shell: bash
-   - run: npm start
-     shell: bash
+  - uses: actions/checkout@v4
+  - uses: actions/setup-node@v4
+    with:
+      node-version: 20
+      cache: 'npm'
+  - run: npm install
+    shell: bash
+  - run: node build/test.js
+    shell: bash
