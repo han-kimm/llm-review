@@ -17,6 +17,9 @@ inputs:
 runs:
   using: "node20"
   main: "build/test.js"
+  pre:
+    - run: npm install
+      shell: bash
 branding:
   icon: "aperture"
   color: "green"
