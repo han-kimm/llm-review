@@ -22,4 +22,6 @@ runs:
       node-version: 20
       cache: 'npm'
   - run: npm install
+    shell: bash
   - run: node src/index.js
+    shell: bash
