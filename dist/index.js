@@ -46214,10 +46214,7 @@ async function getAIResponse(prompt) {
     const queryConfig = {
         model: LLM_API_MODEL ?? 'claude-3-haiku-20240307',
         temperature: 0.2,
-        max_tokens: 700,
-        top_p: 1,
-        frequency_penalty: 0,
-        presence_penalty: 0
+        max_tokens: 700
     };
     try {
         const response = await llm.messages.create({
