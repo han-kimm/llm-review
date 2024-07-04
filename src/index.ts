@@ -172,6 +172,7 @@ async function createReviewComment(
     repo,
     pull_number,
     comments,
+    body: 'This is LLM reviewer for Test. LLM을 사용한 자동 코드 리뷰입니다.',
     event: 'COMMENT'
   })
 }
@@ -180,7 +181,7 @@ async function main() {
   const prDetails = await getPRDetails()
   let diff: string | null
   const eventData = JSON.parse(
-    readFileSync(process.env.GITHUB_EVENT_PATH ?? '', 'utf8')
+    readFileSync(process.env.GITHUB_EVENT_PATH ?? '{}', 'utf8')
   )
 
   if (eventData.action === 'opened') {

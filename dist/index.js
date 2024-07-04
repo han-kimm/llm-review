@@ -72982,13 +72982,14 @@ async function createReviewComment(owner, repo, pull_number, comments) {
         repo,
         pull_number,
         comments,
+        body: 'This is LLM reviewer for Test. LLM을 사용한 자동 코드 리뷰입니다.',
         event: 'COMMENT'
     });
 }
 async function main() {
     const prDetails = await getPRDetails();
     let diff;
-    const eventData = JSON.parse((0,external_fs_.readFileSync)(process.env.GITHUB_EVENT_PATH ?? '', 'utf8'));
+    const eventData = JSON.parse((0,external_fs_.readFileSync)(process.env.GITHUB_EVENT_PATH ?? '{}', 'utf8'));
     if (eventData.action === 'opened') {
         diff = await getDiff(prDetails.owner, prDetails.repo, prDetails.pull_number);
     }
