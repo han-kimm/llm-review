@@ -3,8 +3,12 @@ import { Octokit } from '@octokit/rest'
 import parseDiff, { Chunk, File } from 'parse-diff'
 import { minimatch } from 'minimatch'
 import Anthropic from '@anthropic-ai/sdk'
+import { getInput } from '@actions/core'
 
-const { GITHUB_TOKEN, LLM_API_KEY, LLM_API_MODEL, exclude = '' } = process.env
+const GITHUB_TOKEN = getInput('GITHUB_TOKEN')
+const LLM_API_KEY = getInput('LLM_API_KEY')
+const LLM_API_MODEL = getInput('LLM_API_MODEL')
+const exclude = getInput('exclude') ?? ''
 
 const octokit = new Octokit({ auth: GITHUB_TOKEN })
 
