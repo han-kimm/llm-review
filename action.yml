@@ -1,24 +1,19 @@
-name: 'The name of your action here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
-
-# Add your action's branding here. This will appear on the GitHub Marketplace.
-branding:
-  icon: 'heart'
-  color: 'red'
-
-# Define your inputs here.
+name: 'LLM code reviewer'
+description: 'automatic code review by LLM'
 inputs:
-  milliseconds:
-    description: 'Your input description here'
+  GITHUB_TOKEN:
     required: true
-    default: '1000'
-
-# Define your outputs here.
-outputs:
-  time:
-    description: 'Your output description here'
-
+  LLM_API_KEY:
+    description: 'api key for calling LLM API.'
+    required: true
+  LLM_API_MODEL:
+    description: 'model name to use.'
+    required: false
+    default: 'claude-3-haiku-20240307'
+  exclude:
+    description: 'exclude files from the diff analysis by Glob pattern'
+    required: false
+    default: ''
 runs:
-  using: node20
-  main: dist/index.js
+  using: 'node20'
+  main: 'build/test.js'
