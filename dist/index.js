@@ -1,4 +1,5 @@
-import './sourcemap-register.cjs';/******/ var __webpack_modules__ = ({
+import './sourcemap-register.cjs';import { createRequire as __WEBPACK_EXTERNAL_createRequire } from "module";
+/******/ var __webpack_modules__ = ({
 
 /***/ 659:
 /***/ ((module, exports, __nccwpck_require__) => {
@@ -10702,70 +10703,70 @@ module.exports = eval("require")("encoding");
 /***/ 147:
 /***/ ((module) => {
 
-module.exports = require("fs");
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("fs");
 
 /***/ }),
 
 /***/ 685:
 /***/ ((module) => {
 
-module.exports = require("http");
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("http");
 
 /***/ }),
 
 /***/ 687:
 /***/ ((module) => {
 
-module.exports = require("https");
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("https");
 
 /***/ }),
 
 /***/ 822:
 /***/ ((module) => {
 
-module.exports = require("path");
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("path");
 
 /***/ }),
 
 /***/ 477:
 /***/ ((module) => {
 
-module.exports = require("punycode");
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("punycode");
 
 /***/ }),
 
 /***/ 781:
 /***/ ((module) => {
 
-module.exports = require("stream");
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("stream");
 
 /***/ }),
 
 /***/ 310:
 /***/ ((module) => {
 
-module.exports = require("url");
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("url");
 
 /***/ }),
 
 /***/ 837:
 /***/ ((module) => {
 
-module.exports = require("util");
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("util");
 
 /***/ }),
 
 /***/ 267:
 /***/ ((module) => {
 
-module.exports = require("worker_threads");
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("worker_threads");
 
 /***/ }),
 
 /***/ 796:
 /***/ ((module) => {
 
-module.exports = require("zlib");
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("zlib");
 
 /***/ }),
 
@@ -16851,7 +16852,7 @@ var agentkeepalive = __nccwpck_require__(623);
 // EXTERNAL MODULE: ./node_modules/abort-controller/dist/abort-controller.js
 var abort_controller = __nccwpck_require__(659);
 ;// CONCATENATED MODULE: external "node:fs"
-const external_node_fs_namespaceObject = require("node:fs");
+const external_node_fs_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("node:fs");
 ;// CONCATENATED MODULE: ./node_modules/form-data-encoder/lib/esm/util/createBoundary.js
 const alphabet = "abcdefghijklmnopqrstuvwxyz0123456789";
 function createBoundary() {
@@ -17052,7 +17053,7 @@ const Encoder = (/* unused pure expression or super */ null && (FormDataEncoder)
 
 
 ;// CONCATENATED MODULE: external "node:stream"
-const external_node_stream_namespaceObject = require("node:stream");
+const external_node_stream_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("node:stream");
 ;// CONCATENATED MODULE: ./node_modules/@anthropic-ai/sdk/_shims/MultipartBody.mjs
 /**
  * Disclaimer: modules in _shims aren't intended to be imported by SDK users.
