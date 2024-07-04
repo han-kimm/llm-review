@@ -87,7 +87,8 @@ async function analyzeCode(
 
 function createPrompt(file: File, chunk: Chunk, prDetails: PRDetails): string {
   return `Your task is to review pull requests. Instructions:
-- Provide the response in following JSON format:  {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment in Korean>"}]}
+- Give a comment in Korean.
+- Provide the response in following JSON format:  {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}
 - Do not give positive comments or compliments.
 - Provide comments and suggestions ONLY if there is something to improve, otherwise "reviews" should be an empty array.
 - Write the comment in GitHub Markdown format.
@@ -115,7 +116,7 @@ ${chunk.changes
   .join('\n')}
 \`\`\`
 
-please ensure answer is reliable JSON format : {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment in Korean>"}]}. check the validation by javscript JSON.parse() function.
+please ensure answer is reliable JSON format : {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}. check the validation by javscript JSON.parse() function.
 `
 }
 
