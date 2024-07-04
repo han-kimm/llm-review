@@ -4,6 +4,7 @@ import parseDiff, { Chunk, File } from 'parse-diff'
 import { minimatch } from 'minimatch'
 import Anthropic from '@anthropic-ai/sdk'
 import { getInput } from '@actions/core'
+import { ChatAnthropic } from '@langchain/anthropic'
 
 const GITHUB_TOKEN = getInput('GITHUB_TOKEN')
 const LLM_API_KEY = getInput('LLM_API_KEY')
@@ -12,8 +13,11 @@ const exclude = getInput('exclude') ?? ''
 
 const octokit = new Octokit({ auth: GITHUB_TOKEN })
 
-const llm = new Anthropic({
-  apiKey: LLM_API_KEY
+const llm = new ChatAnthropic({
+  apiKey: LLM_API_KEY,
+  model: LLM_API_MODEL ?? 'claude-3-haiku-20240307',
+  temperature: 0.2,
+  maxTokens: 700
 })
 
 const SYSTEM_PROMPT = 'You are a strict and perfect code review AI.'
@@ -120,28 +124,15 @@ async function getAIResponse(prompt: string): Promise<Array<{
   lineNumber: string
   reviewComment: string
 }> | null> {
-  const queryConfig = {
-    model: LLM_API_MODEL ?? 'claude-3-haiku-20240307',
-    temperature: 0.2,
-    max_tokens: 700
-  }
-
   try {
-    const response = await llm.messages.create({
-      ...queryConfig,
-      // return JSON if the model supports it:
-      system: SYSTEM_PROMPT,
-      messages: [
-        {
-          role: 'user',
-          content: prompt
-        }
-      ]
-    })
+    const response = await llm.invoke([
+      ['system', SYSTEM_PROMPT],
+      ['user', prompt]
+    ])
 
-    const { type } = response.content[0]
-    if (type === 'text') {
-      return JSON.parse(response.content[0].text).reviews
+    const content = response.content
+    if (typeof content === 'string') {
+      return JSON.parse(content).reviews
     }
     return null
   } catch (error) {
