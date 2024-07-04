@@ -19559,7 +19559,7 @@ var sdk_fileFromPath = fileFromPath;
 
 
 
-const { GITHUB_TOKEN, LLM_API_KEY, LLM_API_MODEL, exclude } = process.env;
+const { GITHUB_TOKEN, LLM_API_KEY, LLM_API_MODEL, exclude = '' } = process.env;
 const octokit = new dist_src_Octokit({ auth: GITHUB_TOKEN });
 const llm = new sdk({
     apiKey: LLM_API_KEY

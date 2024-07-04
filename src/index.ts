@@ -4,7 +4,7 @@ import parseDiff, { Chunk, File } from 'parse-diff'
 import { minimatch } from 'minimatch'
 import Anthropic from '@anthropic-ai/sdk'
 
-const { GITHUB_TOKEN, LLM_API_KEY, LLM_API_MODEL, exclude } = process.env
+const { GITHUB_TOKEN, LLM_API_KEY, LLM_API_MODEL, exclude = '' } = process.env
 
 const octokit = new Octokit({ auth: GITHUB_TOKEN })
 
@@ -217,7 +217,7 @@ async function main() {
 
   const parsedDiff = parseDiff(diff)
 
-  const excludePatterns = exclude!.split(',').map(s => s.trim())
+  const excludePatterns = exclude.split(',').map(s => s.trim())
 
   const filteredDiff = parsedDiff.filter(file => {
     return !excludePatterns.some(pattern => minimatch(file.to ?? '', pattern))
