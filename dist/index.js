@@ -72943,7 +72943,7 @@ ${chunk.changes
         .join('\n')}
 \`\`\`
 
-please ensure answer is JSON format : {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment in Korean>"}]}.
+please ensure answer is reliable JSON format : {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment in Korean>"}]}. check the validation by javscript JSON.parse() function.
 `;
 }
 async function getAIResponse(prompt) {
