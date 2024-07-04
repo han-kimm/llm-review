@@ -46182,8 +46182,9 @@ async function analyzeCode(parsedDiff, prDetails) {
     return comments;
 }
 function createPrompt(file, chunk, prDetails) {
-    return `Please answer in Korean. Your task is to review pull requests. Instructions:
+    return `Your task is to review pull requests. Instructions:
 - Provide the response in following JSON format:  {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}
+- Please fill "reviewComment" in Korean.
 - Do not give positive comments or compliments.
 - Provide comments and suggestions ONLY if there is something to improve, otherwise "reviews" should be an empty array.
 - Write the comment in GitHub Markdown format.
@@ -46209,7 +46210,7 @@ ${chunk.changes
         .join('\n')}
 \`\`\`
 
-please ensure all answers are in Korean.
+please ensure answer is JSON format : {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}.
 `;
 }
 async function getAIResponse(prompt) {
