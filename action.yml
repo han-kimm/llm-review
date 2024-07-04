@@ -16,4 +16,4 @@ inputs:
     default: ''
 runs:
   using: 'node20'
-  main: 'build/test.js'
+  main: 'dist/index.js'
