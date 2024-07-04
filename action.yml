@@ -1,26 +1,24 @@
-name: "LLM code reviewer"
-description: "automatic code review by LLM"
+name: 'The name of your action here'
+description: 'Provide a description here'
+author: 'Your name or organization here'
+
+# Add your action's branding here. This will appear on the GitHub Marketplace.
+branding:
+  icon: 'heart'
+  color: 'red'
+
+# Define your inputs here.
 inputs:
-  GITHUB_TOKEN:
+  milliseconds:
+    description: 'Your input description here'
     required: true
-  LLM_API_KEY:
-    description: "api key for calling LLM API."
-    required: true
-  LLM_API_MODEL:
-    description: "model name to use."
-    required: false
-    default: "claude-3-haiku-20240307"
-  exclude:
-    description: "exclude files from the diff analysis by Glob pattern"
-    required: false
-    default: ""
-jobs:
-    - uses: actions/checkout@v4
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '20'
-    - name: Install dependencies
-      run: npm install
-    - name: Run js
-      run: node build/test.js
+    default: '1000'
+
+# Define your outputs here.
+outputs:
+  time:
+    description: 'Your output description here'
+
+runs:
+  using: node20
+  main: dist/index.js
