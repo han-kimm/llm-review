@@ -9,6 +9,11 @@ import { PineconeStore } from '@langchain/pinecone'
 import { Pinecone } from '@pinecone-database/pinecone'
 import { MultiQueryRetriever } from 'langchain/retrievers/multi_query'
 
+getInput('LANGCHAIN_TRACING_V2')
+getInput('LANGCHAIN_ENDPOINT')
+getInput('LANGCHAIN_API_KEY')
+getInput('LANGCHAIN_PROJECT')
+
 const GITHUB_TOKEN = getInput('GITHUB_TOKEN')
 const exclude = getInput('exclude') ?? ''
 const openAIApiKey = getInput('LLM_API_KEY')
@@ -161,8 +166,6 @@ async function triggerRag(file: File, chunk: Chunk, prDetails: PRDetails) {
   `
   const relatedDocs = await confluenceMultiqueryRetriever(query)
 
-  console.log('relatedDocs:', relatedDocs)
-
   return relatedDocs.reduce(
     (acc, doc, index) =>
       acc +
@@ -180,6 +183,8 @@ async function createPrompt(
   chunk: Chunk,
   prDetails: PRDetails
 ): Promise<string> {
+  const relatedDocs = await triggerRag(file, chunk, prDetails)
+  console.log('relatedDocs:', relatedDocs)
   return `Your task is to review pull requests.
   Review Rules:
 - Give answer in JSON format : {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}.
@@ -202,7 +207,7 @@ ${prDetails.description}
 </descriptions>
 
 <convention>
-${await triggerRag(file, chunk, prDetails)}
+${relatedDocs}
 </convention>
 
 \`\`\`diff
