@@ -205,7 +205,7 @@ ${chunk.content}
 ${chunk.changes.map(c => `${'ln' in c ? c.ln : c.ln2} ${c.content}`).join('\n')}
 \`\`\`
 
-please ensure answer is reliable JSON format : {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}. check the validation by javascript JSON.parse() function.
+please ensure "lineNumber" is in diff.
 `
 }
 
