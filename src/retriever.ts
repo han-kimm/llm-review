@@ -5,12 +5,15 @@ import { MultiQueryRetriever } from 'langchain/retrievers/multi_query'
 import { chatOpenai, embedOpenai } from './openai.ts'
 import { getInput } from '@actions/core'
 
+const apiKey = getInput('PINECONE_API_KEY')
 const indexName = getInput('PINECONE_INDEX_NAME')
 const namespace = getInput('PINECONE_NAMESPACE')
 const queryCount = getInput('QUERY_COUNT') ?? '5'
 
 export async function confluenceMultiqueryRetriever(query: string) {
-  const pc = new Pinecone()
+  const pc = new Pinecone({
+    apiKey
+  })
 
   const pineconeIndex = pc.index(indexName)
 
