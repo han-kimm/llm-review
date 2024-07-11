@@ -177,12 +177,12 @@ async function createPrompt(
 ): Promise<string> {
   return `Your task is to review pull requests.
   Review Rules:
-- Give in JSON format : {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}.
+- Give answer in JSON format : {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}.
 - Do not give positive comments or compliments.
 - Provide comments and suggestions ONLY if there is something to improve, otherwise "reviews" should be an empty array.
 - Write the comment in GitHub Markdown format.
 - Give a comment first in English, and finally translate to Korean.
-- If you refer a convention in <convention>, must leave 'related wiki url' in "reviewComment".
+- If you refer a convention in <convention> writing comment, must leave 'related wiki url' with the comment.
 - IMPORTANT: NEVER suggest adding comments to the code.
 
 Review the following code diff in the file "${file.to}"
@@ -214,10 +214,17 @@ async function getAIResponse(prompt: string): Promise<Array<{
   reviewComment: string
 }> | null> {
   try {
-    const response = await chatOpenai.invoke([
-      ['system', SYSTEM_PROMPT],
-      ['user', prompt]
-    ])
+    const response = await chatOpenai.invoke(
+      [
+        ['system', SYSTEM_PROMPT],
+        ['user', prompt]
+      ],
+      {
+        response_format: {
+          type: 'json_object'
+        }
+      }
+    )
 
     const content = response.content
     if (typeof content === 'string') {
