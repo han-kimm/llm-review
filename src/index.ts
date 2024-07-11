@@ -192,7 +192,7 @@ async function createPrompt(
 - Do not give positive comments or compliments.
 - Provide comments and suggestions ONLY if there is something to improve, otherwise "reviews" should be an empty array.
 - Write the comment in GitHub Markdown format.
-- Give a comment first in English, and finally translate to Korean.
+- Give a comment in Korean.
 - If you refer a convention in <convention> writing comment, must leave 'related wiki url' with the comment in Github Markdown format.
 - IMPORTANT: NEVER suggest adding comments to the code.
 
