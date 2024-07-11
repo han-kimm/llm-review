@@ -3,15 +3,38 @@ import { Octokit } from '@octokit/rest'
 import { readFileSync } from 'fs'
 import { minimatch } from 'minimatch'
 import parseDiff, { Chunk, File } from 'parse-diff'
-import { chatOpenai } from './openai.ts'
-import { confluenceMultiqueryRetriever } from './retriever.ts'
+import { ChatOpenAI, OpenAIEmbeddings } from '@langchain/openai'
+import { PromptTemplate } from '@langchain/core/prompts'
+import { PineconeStore } from '@langchain/pinecone'
+import { Pinecone } from '@pinecone-database/pinecone'
+import { MultiQueryRetriever } from 'langchain/retrievers/multi_query'
 
 const GITHUB_TOKEN = getInput('GITHUB_TOKEN')
 const exclude = getInput('exclude') ?? ''
+const openAIApiKey = getInput('LLM_API_KEY')
+const chatModel = getInput('LLM_API_CHAT')
+const embedModel = getInput('LLM_API_EMBEDDING')
+
+const apiKey = getInput('PINECONE_API_KEY')
+const indexName = getInput('PINECONE_INDEX_NAME')
+const namespace = getInput('PINECONE_NAMESPACE')
+const queryCount = getInput('QUERY_COUNT') ?? '5'
 
 const octokit = new Octokit({ auth: GITHUB_TOKEN })
 
 const SYSTEM_PROMPT = 'You are a strict and perfect code review AI.'
+
+const chatOpenai = new ChatOpenAI({
+  openAIApiKey,
+  modelName: chatModel,
+  temperature: 0
+})
+
+const embedOpenai = new OpenAIEmbeddings({
+  openAIApiKey,
+  modelName: embedModel,
+  dimensions: embedModel === 'text-embedding-3-large' ? 1024 : 512
+})
 
 interface PRDetails {
   owner: string
@@ -74,6 +97,47 @@ async function analyzeCode(
     }
   }
   return comments
+}
+
+async function confluenceMultiqueryRetriever(query: string) {
+  const pc = new Pinecone({
+    apiKey
+  })
+
+  const pineconeIndex = pc.index(indexName)
+
+  const vertorStore = await PineconeStore.fromExistingIndex(embedOpenai, {
+    pineconeIndex,
+    namespace
+  })
+
+  const retriever = vertorStore.asRetriever({
+    k: 1
+  })
+
+  const multiqueryRetriever = MultiQueryRetriever.fromLLM({
+    retriever,
+    llm: chatOpenai,
+    queryCount: Number(queryCount),
+    prompt: new PromptTemplate({
+      inputVariables: ['question', 'queryCount'],
+      template: `
+You are a good AI developer. Answer must always be based on given context. you can't lie.
+Generate {queryCount} phrase which summarize the given context. the phrases will be used for searching relevant documents in company's database.
+
+Provide these alternative phrases separated by newlines between XML tags of 'questions'. For example:
+
+<questions>
+phrase 1
+phrase 2
+phrase 3
+</questions>
+
+context:{question}`
+    })
+  })
+
+  return multiqueryRetriever.invoke(query)
 }
 
 async function triggerRag(file: File, chunk: Chunk, prDetails: PRDetails) {
