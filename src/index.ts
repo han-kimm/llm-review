@@ -4,6 +4,7 @@ import { readFileSync } from 'fs'
 import { minimatch } from 'minimatch'
 import parseDiff, { Chunk, File } from 'parse-diff'
 import { chatOpenai } from './openai.ts'
+import { confluenceMultiqueryRetriever } from './retriever.ts'
 
 const GITHUB_TOKEN = getInput('GITHUB_TOKEN')
 const exclude = getInput('exclude') ?? ''
@@ -62,7 +63,7 @@ async function analyzeCode(
   for (const file of parsedDiff) {
     if (file.to === '/dev/null') continue // Ignore deleted files
     for (const chunk of file.chunks) {
-      const prompt = createPrompt(file, chunk, prDetails)
+      const prompt = await createPrompt(file, chunk, prDetails)
       const aiResponse = await getAIResponse(prompt)
       if (aiResponse) {
         const newComments = createComment(file, chunk, aiResponse)
@@ -75,35 +76,72 @@ async function analyzeCode(
   return comments
 }
 
-function createPrompt(file: File, chunk: Chunk, prDetails: PRDetails): string {
-  return `Your task is to review pull requests. Instructions:
-- Give a comment in Korean.
-- Provide the response in following JSON format:  {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}
+async function triggerRag(file: File, chunk: Chunk, prDetails: PRDetails) {
+  const query = `
+  <pullRequestTitle>
+  ${prDetails.title}
+  </pullRequestTitle>
+  <pullRequestDescription>
+  ${prDetails.description}
+  </pullRequestDescription>
+  <fileName>
+  ${file.to}
+  </fileName>
+  \`\`\`diff
+  ${chunk.content}
+  ${chunk.changes.map(c => `${'ln' in c ? c.ln : c.ln2} ${c.content}`).join('\n')}
+  \`\`\`
+  `
+  const relatedDocs = await confluenceMultiqueryRetriever(query)
+
+  return relatedDocs.reduce(
+    (acc, doc, index) =>
+      acc +
+      '\n' +
+      `${index}. ` +
+      doc.pageContent +
+      '\n' +
+      `related wiki: ${doc.metadata.url}\n`,
+    ''
+  )
+}
+
+async function createPrompt(
+  file: File,
+  chunk: Chunk,
+  prDetails: PRDetails
+): Promise<string> {
+  return `Your task is to review pull requests.
+  Review Rules:
+- Give in JSON format : {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}.
 - Do not give positive comments or compliments.
 - Provide comments and suggestions ONLY if there is something to improve, otherwise "reviews" should be an empty array.
 - Write the comment in GitHub Markdown format.
-- Use the given description only for the overall context and only comment the code.
+- Give a comment first in English, and finally translate to Korean.
+- If you refer a convention in <convention>, must leave 'related wiki url' in "reviewComment".
 - IMPORTANT: NEVER suggest adding comments to the code.
 
-Review the following code diff in the file "${
-    file.to
-  }" and take the pull request title and description into account when writing the response.
+Review the following code diff in the file "${file.to}"
+All answer must be based on given XML tags <title> and <description>, <convention>.
+Only if there is no relevant information in <convention>, you can write comment as you know. but you can't lie.
   
-Pull request title: ${prDetails.title}
-Pull request description:
-
----
+<title>
+${prDetails.title}
+</title>
+<descriptions>
 ${prDetails.description}
----
+</descriptions>
 
-Git diff to review:
+<convention>
+${await triggerRag(file, chunk, prDetails)}
+</convention>
 
 \`\`\`diff
 ${chunk.content}
 ${chunk.changes.map(c => `${'ln' in c ? c.ln : c.ln2} ${c.content}`).join('\n')}
 \`\`\`
 
-please ensure answer is reliable JSON format : {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}. check the validation by javscript JSON.parse() function.
+please ensure answer is reliable JSON format : {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}. check the validation by javascript JSON.parse() function.
 `
 }
 
