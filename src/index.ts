@@ -1,24 +1,14 @@
-import { readFileSync } from 'fs'
-import { Octokit } from '@octokit/rest'
-import parseDiff, { Chunk, File } from 'parse-diff'
-import { minimatch } from 'minimatch'
-import Anthropic from '@anthropic-ai/sdk'
 import { getInput } from '@actions/core'
-import { ChatAnthropic } from '@langchain/anthropic'
+import { Octokit } from '@octokit/rest'
+import { readFileSync } from 'fs'
+import { minimatch } from 'minimatch'
+import parseDiff, { Chunk, File } from 'parse-diff'
+import { chatOpenai } from './openai.ts'
 
 const GITHUB_TOKEN = getInput('GITHUB_TOKEN')
-const LLM_API_KEY = getInput('LLM_API_KEY')
-const LLM_API_MODEL = getInput('LLM_API_MODEL')
 const exclude = getInput('exclude') ?? ''
 
 const octokit = new Octokit({ auth: GITHUB_TOKEN })
-
-const llm = new ChatAnthropic({
-  apiKey: LLM_API_KEY,
-  model: LLM_API_MODEL ?? 'claude-3-haiku-20240307',
-  temperature: 0.2,
-  maxTokens: 700
-})
 
 const SYSTEM_PROMPT = 'You are a strict and perfect code review AI.'
 
@@ -110,10 +100,7 @@ Git diff to review:
 
 \`\`\`diff
 ${chunk.content}
-${chunk.changes
-  // @ts-expect-error - ln and ln2 exists where needed
-  .map(c => `${c.ln ? c.ln : c.ln2} ${c.content}`)
-  .join('\n')}
+${chunk.changes.map(c => `${'ln' in c ? c.ln : c.ln2} ${c.content}`).join('\n')}
 \`\`\`
 
 please ensure answer is reliable JSON format : {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}. check the validation by javscript JSON.parse() function.
@@ -125,7 +112,7 @@ async function getAIResponse(prompt: string): Promise<Array<{
   reviewComment: string
 }> | null> {
   try {
-    const response = await llm.invoke([
+    const response = await chatOpenai.invoke([
       ['system', SYSTEM_PROMPT],
       ['user', prompt]
     ])

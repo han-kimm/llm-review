@@ -70,7 +70,11 @@
     "@actions/core": "^1.10.1",
     "@anthropic-ai/sdk": "^0.24.3",
     "@langchain/anthropic": "^0.2.3",
+    "@langchain/pinecone": "^0.0.7",
     "@octokit/rest": "^21.0.0",
+    "@pinecone-database/pinecone": "^2.2.2",
+    "langchain": "^0.2.9",
+    "minimatch": "^10.0.1",
     "parse-diff": "^0.11.1"
   },
   "devDependencies": {
@@ -91,5 +95,6 @@
     "prettier-eslint": "^16.3.0",
     "ts-jest": "^29.1.5",
     "typescript": "^5.5.2"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
