@@ -161,6 +161,8 @@ async function triggerRag(file: File, chunk: Chunk, prDetails: PRDetails) {
   `
   const relatedDocs = await confluenceMultiqueryRetriever(query)
 
+  console.log('relatedDocs:', relatedDocs)
+
   return relatedDocs.reduce(
     (acc, doc, index) =>
       acc +
