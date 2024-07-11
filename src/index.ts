@@ -27,7 +27,8 @@ const queryCount = getInput('QUERY_COUNT') ?? '5'
 
 const octokit = new Octokit({ auth: GITHUB_TOKEN })
 
-const SYSTEM_PROMPT = 'You are a strict and perfect code review AI.'
+const SYSTEM_PROMPT =
+  'You are a strict and perfect code review AI. Your task is to review pull requests.'
 
 const chatOpenai = new ChatOpenAI({
   openAIApiKey,
@@ -185,14 +186,14 @@ async function createPrompt(
 ): Promise<string> {
   const relatedDocs = await triggerRag(file, chunk, prDetails)
   console.log('relatedDocs:', relatedDocs)
-  return `Your task is to review pull requests.
+  return `
   Review Rules:
 - Give answer in JSON format : {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}.
 - Do not give positive comments or compliments.
 - Provide comments and suggestions ONLY if there is something to improve, otherwise "reviews" should be an empty array.
 - Write the comment in GitHub Markdown format.
 - Give a comment first in English, and finally translate to Korean.
-- If you refer a convention in <convention> writing comment, must leave 'related wiki url' with the comment.
+- If you refer a convention in <convention> writing comment, must leave 'related wiki url' with the comment in Github Markdown format.
 - IMPORTANT: NEVER suggest adding comments to the code.
 
 Review the following code diff in the file "${file.to}"
@@ -215,7 +216,7 @@ ${chunk.content}
 ${chunk.changes.map(c => `${'ln' in c ? c.ln : c.ln2} ${c.content}`).join('\n')}
 \`\`\`
 
-please ensure "lineNumber" is in diff.
+please ensure all answer is in Korean.
 `
 }
 
