@@ -193,13 +193,14 @@ async function createPrompt(
 - Provide comments and suggestions ONLY if there is something to improve, otherwise "reviews" should be an empty array.
 - Write the comment in GitHub Markdown format.
 - Give a comment in Korean.
+- All answer must be based on given contexts in XML tags, <filename>, <title>, <descriptions>, <convention>.
 - If you refer a convention in <convention> writing comment, must leave 'related wiki url' in <convention> with the comment in Github Markdown format.
 - IMPORTANT: NEVER suggest adding comments to the code.
 
-Review the following code diff in the file "${file.to}"
-All answer must be based on given XML tags <title> and <description>, <convention>.
-Only if there is no relevant information in <convention>, you can write comment as you know. but you can't lie.
-  
+<filename>
+${file.to}
+</filename>
+
 <title>
 ${prDetails.title}
 </title>
