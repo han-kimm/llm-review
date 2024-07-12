@@ -190,12 +190,13 @@ async function createPrompt(
   return `
   Review Rules:
 - Give answer in JSON format : {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}.
-- Do not give positive comments or compliments.
-- Provide comments and suggestions ONLY if there is something to improve, otherwise "reviews" should be an empty array.
 - Write the comment in GitHub Markdown format.
 - Give a comment in Korean.
 - All answer must be based on given contexts in XML tags, <filename>, <title>, <descriptions>, <convention>.
 - If you refer a convention in <convention> writing comment, must leave 'related wiki url' in <convention> with the comment in Github Markdown format.
+- Do not give positive comments or compliments.
+- Provide comments and suggestions ONLY if there is something to improve, otherwise "reviews" should be an empty array.
+- Do not comment about the code style(lint) or formatting(prettier).
 - IMPORTANT: NEVER suggest adding comments to the code.
 
 <filename>
