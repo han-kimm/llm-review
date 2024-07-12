@@ -167,6 +167,7 @@ async function triggerRag(file: File, chunk: Chunk, prDetails: PRDetails) {
   \`\`\`
   `
   const relatedDocs = await confluenceMultiqueryRetriever(query)
+  console.log('relatedDocs:', relatedDocs.length)
 
   return relatedDocs.reduce(
     (acc, doc, index) =>
@@ -186,7 +187,7 @@ async function createPrompt(
   prDetails: PRDetails
 ): Promise<string> {
   const relatedDocs = await triggerRag(file, chunk, prDetails)
-  console.log('relatedDocs:', relatedDocs)
+
   return `
   Review Rules:
 - Give answer in JSON format : {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}.
