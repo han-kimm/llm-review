@@ -8,6 +8,7 @@ import { PromptTemplate } from '@langchain/core/prompts'
 import { PineconeStore } from '@langchain/pinecone'
 import { Pinecone } from '@pinecone-database/pinecone'
 import { MultiQueryRetriever } from 'langchain/retrievers/multi_query'
+import { traceable } from 'langsmith/traceable'
 
 getInput('LANGCHAIN_TRACING_V2')
 getInput('LANGCHAIN_ENDPOINT')
@@ -105,7 +106,7 @@ async function analyzeCode(
   return comments
 }
 
-async function confluenceMultiqueryRetriever(query: string) {
+const confluenceMultiqueryRetriever = traceable(async function (query: string) {
   const pc = new Pinecone({
     apiKey
   })
@@ -144,7 +145,7 @@ context:{question}`
   })
 
   return multiqueryRetriever.invoke(query)
-}
+})
 
 async function triggerRag(file: File, chunk: Chunk, prDetails: PRDetails) {
   const query = `

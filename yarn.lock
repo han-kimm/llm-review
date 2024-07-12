@@ -3484,7 +3484,7 @@ langchainhub@~0.0.8:
   resolved "https://registry.yarnpkg.com/langchainhub/-/langchainhub-0.0.11.tgz#2ce22def9c84699dcbd4fd4b78270d34bd2a9ae9"
   integrity sha512-WnKI4g9kU2bHQP136orXr2bcRdgz9iiTBpTN0jWt9IlScUKnJBoD0aa2HOzHURQKeQDnt2JwqVmQ6Depf5uDLQ==
 
-langsmith@~0.1.30:
+langsmith@^0.1.36, langsmith@~0.1.30:
   version "0.1.36"
   resolved "https://registry.yarnpkg.com/langsmith/-/langsmith-0.1.36.tgz#5f21b9c6bcd4ea9c0e943f83e304a53e5232297d"
   integrity sha512-D5hhkFl31uxFdffx0lA6pin0lt8Pv2dpHFZYpSgEzvQ26PQ/Y/tnniQ+aCNokIXuLhMa7uqLtb6tfwjfiZXgdg==
