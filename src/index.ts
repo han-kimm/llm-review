@@ -198,9 +198,10 @@ async function createPrompt(
 
   return `
   Review Rules:
+- All code diff are javascript and typescript.
 - Give answer in JSON format : {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}.
 - Write the comment in GitHub Markdown format.
-- All answer is based on related contexts in XML tags, <filename>, <title>, <descriptions>, <convention>.
+- All answer is based on related contexts in <convention>.
 - If you refer a convention in <convention> writing comment, must leave 'related wiki url' in <convention> with the comment in Github Markdown format.
 - When you can't find related contexts, you can answer generally. But don't lie.
 - Do not give positive comments or compliments.
