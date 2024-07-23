@@ -204,7 +204,7 @@ async function createPrompt(
 - All answer is based on related contexts in <convention>.
 - If you refer a convention in <convention> writing comment, must leave 'related wiki url' in <convention> with the comment in Github Markdown format.
 - When you can't find related contexts, you can answer generally. But don't lie.
-- Do not give positive comments or compliments.
+- When code diff conform <convention>, just comment "convention OK". Do not give positive comments or compliments.
 - Provide comments and suggestions ONLY if there is something to improve, otherwise "reviews" should be an empty array.
 - Do not comment about the code style(lint) or formatting(prettier).
 - IMPORTANT: NEVER suggest adding comments to the code.
@@ -236,7 +236,7 @@ answer example:
   "reviews": [
     {
       "lineNumber": "3",
-      "reviewComment": "refer this wiki: [related wiki url]"
+      "reviewComment": "[related wiki](related wiki url)"
     }
   ]
 }
