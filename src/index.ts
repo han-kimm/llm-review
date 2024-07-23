@@ -28,8 +28,18 @@ const queryCount = getInput('QUERY_COUNT') ?? '5'
 
 const octokit = new Octokit({ auth: GITHUB_TOKEN })
 
-const SYSTEM_PROMPT =
-  'You are a strict and perfect code review AI. Your task is to review pull requests.'
+const SYSTEM_PROMPT = `You are a strict and perfect code review AI. Your task is to check whether the code diff conforms the code convention.
+    Review Rules:
+- All code diffs are javascript and typescript.
+- Give answer in JSON format : {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}.
+- Write the comment in GitHub Markdown format.
+- If you can match the code diff with convention in <convention>, must leave 'related wiki url' in <convention> with the comment in Github Markdown format.
+- When the code diff conform the matched convention, just comment "convention OK" and leave 'related wiki url'.
+- When you can't find related contexts, you can answer generally. But don't lie.
+- Provide comments and suggestions ONLY if there is something to improve, otherwise "reviews" should be an empty array.
+- Do not comment about the code style(lint) or formatting(prettier).
+- IMPORTANT: NEVER suggest adding comments to the code.
+  `
 
 const chatOpenai = new ChatOpenAI({
   openAIApiKey,
@@ -197,18 +207,6 @@ async function createPrompt(
   const relatedDocs = await triggerRag(file, chunk, prDetails)
 
   return `
-  Review Rules:
-- All code diff are javascript and typescript.
-- Give answer in JSON format : {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}.
-- Write the comment in GitHub Markdown format.
-- All answer is based on related contexts in <convention>.
-- If you refer a convention in <convention> writing comment, must leave 'related wiki url' in <convention> with the comment in Github Markdown format.
-- When you can't find related contexts, you can answer generally. But don't lie.
-- When code diff conform <convention>, just comment "convention OK". Do not give positive comments or compliments.
-- Provide comments and suggestions ONLY if there is something to improve, otherwise "reviews" should be an empty array.
-- Do not comment about the code style(lint) or formatting(prettier).
-- IMPORTANT: NEVER suggest adding comments to the code.
-
 <filename>
 ${file.to}
 </filename>
