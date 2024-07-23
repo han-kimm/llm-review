@@ -228,6 +228,20 @@ ${relatedDocs}
 ${chunk.content}
 ${chunk.changes.map(c => `${'ln' in c ? c.ln : c.ln2} ${c.content}`).join('\n')}
 \`\`\`
+
+answer example:
+
+\`\`\`json
+{
+  "reviews": [
+    {
+      "lineNumber": "3",
+      "reviewComment": "refer this wiki: [related wiki url]"
+    }
+  ]
+}
+\`\`\`
+
 `
 }
 
