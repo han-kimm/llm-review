@@ -129,18 +129,26 @@ const confluenceMultiqueryRetriever = traceable(async function (query: string) {
     prompt: new PromptTemplate({
       inputVariables: ['question', 'queryCount'],
       template: `
-You are a good AI developer. Answer must always be based on given context. you can't lie.
-Generate {queryCount} phrase which summarize the given context. the phrases will be used for searching relevant documents in company's database.
+You are a code convention checker.
+Given that you need to make good quality code or refactor related code, Generate {queryCount} sentences which are related the given context.
+Your answer is for retrieving relevant documents from vector database.
 
-Provide these alternative phrases separated by newlines between XML tags of 'questions'. For example:
-
+Provide these alternative sentences separated by newlines between XML tags of 'questions'.
+For example:
+<context>
+react
+</context>
 <questions>
-phrase 1
-phrase 2
-phrase 3
+1. code convention of react
+2. front-end code convention
+3. front-end component code convention
 </questions>
 
-context:{question}`
+Here is your answer:
+<context>
+{question}
+</context>
+`
     })
   })
 
