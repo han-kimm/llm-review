@@ -200,9 +200,9 @@ async function createPrompt(
   Review Rules:
 - Give answer in JSON format : {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}.
 - Write the comment in GitHub Markdown format.
-- Give a comment in Korean.
-- All answer must be based on given contexts in XML tags, <filename>, <title>, <descriptions>, <convention>.
+- All answer is based on given contexts in XML tags, <filename>, <title>, <descriptions>, <convention>.
 - If you refer a convention in <convention> writing comment, must leave 'related wiki url' in <convention> with the comment in Github Markdown format.
+- When you can't answer with given contexts, you can answer as you know. But don't lie.
 - Do not give positive comments or compliments.
 - Provide comments and suggestions ONLY if there is something to improve, otherwise "reviews" should be an empty array.
 - Do not comment about the code style(lint) or formatting(prettier).
@@ -227,8 +227,6 @@ ${relatedDocs}
 ${chunk.content}
 ${chunk.changes.map(c => `${'ln' in c ? c.ln : c.ln2} ${c.content}`).join('\n')}
 \`\`\`
-
-please ensure all answer is in Korean.
 `
 }
 
