@@ -646,28 +646,27 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@langchain/anthropic@^0.2.3":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@langchain/anthropic/-/anthropic-0.2.3.tgz#1505da939f47c90e53dfede0407c497b8177bdf0"
-  integrity sha512-f2fqzLGcvsXXUyZ1vl8cgwkKDGLshOGrPuR9hkhGuBG5m91eq755OqPBxWJuS1TFtNU813cXft3xh0MQbxavwg==
+"@langchain/anthropic@^0.2.12":
+  version "0.2.12"
+  resolved "https://registry.yarnpkg.com/@langchain/anthropic/-/anthropic-0.2.12.tgz#78b6e79030f6911eb89b3647a239a1c7fb34948d"
+  integrity sha512-F74kgQiHHLMSc1CYB3wAPh6ou+ql8ExOqeOMe/NPwK8MuMqC6By/44lAtuV/hOSE/pUmQCNfJmnYwuwteXCXRA==
   dependencies:
     "@anthropic-ai/sdk" "^0.22.0"
-    "@langchain/core" ">=0.2.9 <0.3.0"
+    "@langchain/core" ">=0.2.16 <0.3.0"
     fast-xml-parser "^4.3.5"
     zod "^3.22.4"
     zod-to-json-schema "^3.22.4"
 
-"@langchain/core@>0.2.0 <0.3.0", "@langchain/core@>=0.2.11 <0.3.0", "@langchain/core@>=0.2.8 <0.3.0", "@langchain/core@>=0.2.9 <0.3.0":
-  version "0.2.15"
-  resolved "https://registry.yarnpkg.com/@langchain/core/-/core-0.2.15.tgz#1bb99ac4fffe935c7ba37edcaa91abfba3c82219"
-  integrity sha512-L096itIBQ5XNsy5BCCPqIQEk/x4rzI+U4BhYT+fDBYtljESshIi/WzXdmiGfY/6MpVjB76jNuaRgMDmo1m9NeQ==
+"@langchain/core@>0.2.0 <0.3.0", "@langchain/core@>=0.2.11 <0.3.0", "@langchain/core@>=0.2.16 <0.3.0", "@langchain/core@>=0.2.8 <0.3.0":
+  version "0.2.20"
+  resolved "https://registry.yarnpkg.com/@langchain/core/-/core-0.2.20.tgz#5115781b0a86db3ce4b697e473405892c09621ca"
+  integrity sha512-WPBjrzOj79/yqjloDUIw1GDhuRQfHis07TyyDj+qS81nHh0svSasetKcqAZ3L5JoPcBmEL7rRBtM+OcyC3mLVg==
   dependencies:
     ansi-styles "^5.0.0"
     camelcase "6"
     decamelize "1.2.0"
     js-tiktoken "^1.0.12"
-    langsmith "~0.1.30"
-    ml-distance "^4.0.0"
+    langsmith "~0.1.39"
     mustache "^4.2.0"
     p-queue "^6.6.2"
     p-retry "4"
@@ -686,15 +685,15 @@
     zod "^3.22.4"
     zod-to-json-schema "^3.22.3"
 
-"@langchain/pinecone@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@langchain/pinecone/-/pinecone-0.0.7.tgz#aa8f0be88d86c8d798467f3e75a3ed0871ba78a7"
-  integrity sha512-PQztQOjMyVSBz4AofpKMn619PyVVF6Gl0OJzubolZNUA4lbR3UR+kENEe81WD6RSbBy3K9brOfjDDYx1hmtqOw==
+"@langchain/pinecone@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@langchain/pinecone/-/pinecone-0.0.8.tgz#b2fb2639d63106c612d53b39045fc4abb31914db"
+  integrity sha512-pV23SUebsNoMDOKbervrFNzCD48KVPLRd85jl/k6Ir8fLJDYmvon76T/SyBbrxZBDmWTaszq/LMwtJTh/VyUJg==
   dependencies:
     "@langchain/core" ">0.2.0 <0.3.0"
-    "@pinecone-database/pinecone" "^2.2.0"
+    "@pinecone-database/pinecone" "^3.0.0"
     flat "^5.0.2"
-    uuid "^9.0.0"
+    uuid "^10.0.0"
 
 "@langchain/textsplitters@~0.0.0":
   version "0.0.3"
@@ -772,10 +771,10 @@
   dependencies:
     "@octokit/types" "^13.5.0"
 
-"@octokit/plugin-request-log@^5.1.0":
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/@octokit/plugin-request-log/-/plugin-request-log-5.3.0.tgz#4dea4f34316b7075d02796edcb73103266119e61"
-  integrity sha512-FiGcyjdtYPlr03ExBk/0ysIlEFIFGJQAVoPPMxL19B24bVSEiZQnVGBunNtaAF1YnvE/EFoDpXmITtRnyCiypQ==
+"@octokit/plugin-request-log@^5.3.1":
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/@octokit/plugin-request-log/-/plugin-request-log-5.3.1.tgz#ccb75d9705de769b2aa82bcd105cc96eb0c00f69"
+  integrity sha512-n/lNeCtq+9ofhC15xzmJCNKP2BWTv8Ih2TTy+jatNCCq/gQP/V7rK3fjIfuz0pDWDALO/o/4QY4hyOF6TQQFUw==
 
 "@octokit/plugin-rest-endpoint-methods@^13.0.0":
   version "13.2.4"
@@ -801,14 +800,14 @@
     "@octokit/types" "^13.1.0"
     universal-user-agent "^7.0.2"
 
-"@octokit/rest@^21.0.0":
-  version "21.0.0"
-  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-21.0.0.tgz#bde4b657193643b6b691810fe890755a3c67dd9f"
-  integrity sha512-XudXXOmiIjivdjNZ+fN71NLrnDM00sxSZlhqmPR3v0dVoJwyP628tSlc12xqn8nX3N0965583RBw5GPo6r8u4Q==
+"@octokit/rest@^21.0.1":
+  version "21.0.1"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-21.0.1.tgz#b77d985ded81ac180f4efb26858311c0fcb8462c"
+  integrity sha512-RWA6YU4CqK0h0J6tfYlUFnH3+YgBADlxaHXaKSG+BVr2y4PTfbU2tlKuaQoQZ83qaTbi4CUxLNAmbAqR93A6mQ==
   dependencies:
     "@octokit/core" "^6.1.2"
     "@octokit/plugin-paginate-rest" "^11.0.0"
-    "@octokit/plugin-request-log" "^5.1.0"
+    "@octokit/plugin-request-log" "^5.3.1"
     "@octokit/plugin-rest-endpoint-methods" "^13.0.0"
 
 "@octokit/types@^13.0.0", "@octokit/types@^13.1.0", "@octokit/types@^13.5.0":
@@ -818,10 +817,20 @@
   dependencies:
     "@octokit/openapi-types" "^22.2.0"
 
-"@pinecone-database/pinecone@^2.2.0", "@pinecone-database/pinecone@^2.2.2":
+"@pinecone-database/pinecone@^2.2.2":
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/@pinecone-database/pinecone/-/pinecone-2.2.2.tgz#1040efd09b76463a46e91dea35bb61b7a4351769"
   integrity sha512-gbe/4SowHc64pHIm0kBdgY9hVdzsQnnnpcWviwYMB33gOmsL8brvE8fUSpl1dLDvdyXzKcQkzdBsjCDlqgpdMA==
+  dependencies:
+    "@sinclair/typebox" "^0.29.0"
+    ajv "^8.12.0"
+    cross-fetch "^3.1.5"
+    encoding "^0.1.13"
+
+"@pinecone-database/pinecone@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@pinecone-database/pinecone/-/pinecone-3.0.0.tgz#972bf81dcd123b58aa70dbc506e9131ecc832b1a"
+  integrity sha512-ppBRr9MZRW8U2eww3QU1s5oTa0sXbaHrRJRS8x1++WVUPclcb6T6me/5sv9cLZDvldvsZY26k3fnrEoXLNnPUQ==
   dependencies:
     "@sinclair/typebox" "^0.29.0"
     ajv "^8.12.0"
@@ -3457,10 +3466,10 @@ kleur@^3.0.3:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
-langchain@^0.2.9:
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/langchain/-/langchain-0.2.9.tgz#1341bdd7166f4f6da0b9337f363e409a79523dbb"
-  integrity sha512-iZ0l7BDVfoifqZlDl1gy3JP5mIdhYjWiToPlDnlmfHD748cw3okvF0gZo0ruT4nbftnQcaM7JzPUiNC43UPfgg==
+langchain@^0.2.12:
+  version "0.2.12"
+  resolved "https://registry.yarnpkg.com/langchain/-/langchain-0.2.12.tgz#3fac0b9519a070689b6dd679d5854abc57824dcf"
+  integrity sha512-ZHtJrHUpridZ7IQu7N/wAQ6iMAAO7VLzkupHqKP79S6p+alrPbn1BjRnh+PeGm92YiY5DafTCuvchmujxx7bCQ==
   dependencies:
     "@langchain/core" ">=0.2.11 <0.3.0"
     "@langchain/openai" ">=0.1.0 <0.3.0"
@@ -3484,15 +3493,16 @@ langchainhub@~0.0.8:
   resolved "https://registry.yarnpkg.com/langchainhub/-/langchainhub-0.0.11.tgz#2ce22def9c84699dcbd4fd4b78270d34bd2a9ae9"
   integrity sha512-WnKI4g9kU2bHQP136orXr2bcRdgz9iiTBpTN0jWt9IlScUKnJBoD0aa2HOzHURQKeQDnt2JwqVmQ6Depf5uDLQ==
 
-langsmith@^0.1.36, langsmith@~0.1.30:
-  version "0.1.36"
-  resolved "https://registry.yarnpkg.com/langsmith/-/langsmith-0.1.36.tgz#5f21b9c6bcd4ea9c0e943f83e304a53e5232297d"
-  integrity sha512-D5hhkFl31uxFdffx0lA6pin0lt8Pv2dpHFZYpSgEzvQ26PQ/Y/tnniQ+aCNokIXuLhMa7uqLtb6tfwjfiZXgdg==
+langsmith@^0.1.36, langsmith@~0.1.30, langsmith@~0.1.39:
+  version "0.1.40"
+  resolved "https://registry.yarnpkg.com/langsmith/-/langsmith-0.1.40.tgz#9708889386a5b9d0eb43dd3a9eba93513b57101d"
+  integrity sha512-11E2WLbh/+41+Qc0w8fJJTC/iz91BA+zXRMX/Wz0KSstnfzIPBoiWa++Kp2X8yCIDNywWWLJhy/B8gYzm7VKig==
   dependencies:
     "@types/uuid" "^9.0.1"
     commander "^10.0.1"
     p-queue "^6.6.2"
     p-retry "4"
+    semver "^7.6.3"
     uuid "^9.0.0"
 
 language-subtag-registry@^0.3.20:
@@ -4229,6 +4239,11 @@ semver@^7.3.5, semver@^7.3.6, semver@^7.5.3, semver@^7.5.4, semver@^7.6.0:
   version "7.6.2"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.6.2.tgz#1e3b34759f896e8f14d6134732ce798aeb0c6e13"
   integrity sha512-FNAIBWCx9qcRhoHcgcJ0gvU7SN1lYU2ZXuSfl04bSC5OpvDHFyJCjdNHomPXxjQlCBU67YW64PzY7/VIEH7F2w==
+
+semver@^7.6.3:
+  version "7.6.3"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-7.6.3.tgz#980f7b5550bc175fb4dc09403085627f9eb33143"
+  integrity sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==
 
 set-function-length@^1.2.1:
   version "1.2.2"
