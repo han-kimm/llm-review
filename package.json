@@ -71,10 +71,10 @@
     "@anthropic-ai/sdk": "^0.24.3",
     "@langchain/anthropic": "^0.2.3",
     "@langchain/pinecone": "^0.0.7",
-    "@octokit/rest": "^21.0.0",
+    "@octokit/rest": "^21.0.2",
     "@pinecone-database/pinecone": "^2.2.2",
     "langchain": "^0.2.9",
-    "langsmith": "^0.1.36",
+    "langsmith": "^0.1.55",
     "minimatch": "^10.0.1",
     "parse-diff": "^0.11.1"
   },
