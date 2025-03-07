@@ -818,10 +818,20 @@
   dependencies:
     "@octokit/openapi-types" "^22.2.0"
 
-"@pinecone-database/pinecone@^2.2.0", "@pinecone-database/pinecone@^2.2.2":
+"@pinecone-database/pinecone@^2.2.0":
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/@pinecone-database/pinecone/-/pinecone-2.2.2.tgz#1040efd09b76463a46e91dea35bb61b7a4351769"
   integrity sha512-gbe/4SowHc64pHIm0kBdgY9hVdzsQnnnpcWviwYMB33gOmsL8brvE8fUSpl1dLDvdyXzKcQkzdBsjCDlqgpdMA==
+  dependencies:
+    "@sinclair/typebox" "^0.29.0"
+    ajv "^8.12.0"
+    cross-fetch "^3.1.5"
+    encoding "^0.1.13"
+
+"@pinecone-database/pinecone@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@pinecone-database/pinecone/-/pinecone-3.0.0.tgz#972bf81dcd123b58aa70dbc506e9131ecc832b1a"
+  integrity sha512-ppBRr9MZRW8U2eww3QU1s5oTa0sXbaHrRJRS8x1++WVUPclcb6T6me/5sv9cLZDvldvsZY26k3fnrEoXLNnPUQ==
   dependencies:
     "@sinclair/typebox" "^0.29.0"
     ajv "^8.12.0"
